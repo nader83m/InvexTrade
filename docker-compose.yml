@@ -1,0 +1,41 @@
+version: "3.7"
+
+services:
+  ServerApp:
+    build: ./ServerApp
+    container_name: invextrade-serverspp
+    image: nadiribrahimpur/invextrade-serverspp
+    network_mode: host
+    restart: always
+    expose:
+     - 8080
+    volumes:
+     - /home/trader/InvexTrade/data:/data
+
+  ClientApp:
+     build: ./ClientApp
+     container_name: invextrade-clientspp
+     image: nadiribrahimpur/invextrade-clientspp
+     network_mode: host
+     restart: always
+     expose:
+       - 80
+     volumes:
+       - /home/trader/InvexTrade/data:/data
+  # nginx:
+  #   build: ./nginx
+  #   container_name: nginx
+  #   image: nadiribrahimpur/invextrade_nginx
+  #   restart: always
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - /media/nadir/data/invex/InvexTrade/data:/data
+
+volumes:
+  data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: data

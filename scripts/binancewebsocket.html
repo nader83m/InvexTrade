@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+
+ 	<script type="text/javascript">
+		var binanceSocket = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@kline_15m");
+
+		binanceSocket.onmessage = function (event) {	
+			var message = JSON.parse(event.data);
+
+			var candlestick = message.k;
+
+			console.log(candlestick)
+
+			// ({
+			// 	time: candlestick.t / 1000,
+			// 	open: candlestick.o,
+			// 	high: candlestick.h,
+			// 	low: candlestick.l,
+			// 	close: candlestick.c,
+			// 	volume: candlestick.v
+
+			// })
+		}
+ 	</script>
+
+</body>
+</html>
